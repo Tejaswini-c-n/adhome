@@ -95,7 +95,7 @@ function AdhomePage() {
     <main className="bg-background">
       <Header />
       <section id="home" className="editorial-grain relative min-h-[94svh] overflow-hidden bg-espresso text-primary-foreground">
-        <img src={heroImage} alt="A cocoa-dusted slice of classic tiramisu" width={1600} height={1200} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover object-[58%_center]" />
+        <img src={heroImage} alt="A cocoa-dusted slice of classic tiramisu" width={1600} height={1200} fetchPriority="high" className="hero-parallax absolute inset-0 h-full w-full object-cover object-[58%_center]" />
         <div className="absolute inset-0 bg-gradient-to-r from-espresso via-espresso/70 to-transparent" />
         <div className="relative z-10 mx-auto flex min-h-[94svh] max-w-[1440px] flex-col justify-end px-5 pb-16 pt-32 sm:px-8 sm:pb-20 lg:px-12 lg:pb-24">
           <div className="reveal max-w-3xl">
