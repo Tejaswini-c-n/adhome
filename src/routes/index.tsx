@@ -8,6 +8,17 @@ import collectionImage from "@/assets/adhome-tiramisu-collection.jpg";
 import chocolateImage from "@/assets/adhome-chocolate-gift.jpg";
 import storyImage from "@/assets/adhome-story.jpg";
 import momentImage from "@/assets/adhome-moment.jpg";
+import dryFruitImage from "@/assets/adhome-dry-fruit.jpg";
+import chocoChipImage from "@/assets/adhome-choco-chip.jpg";
+import strawberryImage from "@/assets/adhome-strawberry.jpg";
+import blueberryImage from "@/assets/adhome-blueberry.jpg";
+import craftImage from "@/assets/adhome-craft.jpg";
+import celebrationImage from "@/assets/adhome-celebration.jpg";
+import visitImage from "@/assets/adhome-visit.jpg";
+import gallerySpoonImage from "@/assets/adhome-gallery-spoon.jpg";
+import galleryBoxImage from "@/assets/adhome-gallery-box.jpg";
+import galleryCocoaImage from "@/assets/adhome-gallery-cocoa.jpg";
+import galleryShareImage from "@/assets/adhome-gallery-share.jpg";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
@@ -17,15 +28,15 @@ const directionsHref = "https://www.google.com/maps/dir/?api=1&destination=107%2
 const reviewsHref = "https://www.google.com/maps/search/?api=1&query=Adhome%2C%20107%2C%208th%20Cross%20Rd%2C%20Malleshwaram%2C%20Bengaluru%2C%20Karnataka%20560003";
 
 const nav = [
-  ["Home", "home"], ["Tiramisu", "tiramisu"], ["Chocolates", "chocolates"],
+  ["Home", "home"], ["Menu", "menu"], ["Chocolates", "chocolates"],
   ["Our Story", "story"], ["Reviews", "reviews"], ["Visit Us", "visit"],
 ] as const;
 
 const products = [
-  ["Dry Fruit Tiramisu", "A rich variation with a delicately textured finish."],
-  ["Choco Chip Tiramisu", "Creamy, indulgent and finished with a chocolatey bite."],
-  ["Strawberry Tiramisu", "A bright, fruit-forward take on the Adhome favourite."],
-  ["Blueberry Tiramisu", "A luscious variation with a vibrant berry finish."],
+  ["Dry Fruit Tiramisu", "A rich variation with a delicately textured finish.", dryFruitImage],
+  ["Choco Chip Tiramisu", "Creamy, indulgent and finished with a chocolatey bite.", chocoChipImage],
+  ["Strawberry Tiramisu", "A bright, fruit-forward take on the Adhome favourite.", strawberryImage],
+  ["Blueberry Tiramisu", "A luscious variation with a vibrant berry finish.", blueberryImage],
 ] as const;
 
 const reviews = [
@@ -38,7 +49,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Adhome — Premium Tiramisu & Chocolates in Malleshwaram" },
-      { name: "description", content: "Discover Adhome's indulgent tiramisu varieties and handcrafted chocolates in Malleshwaram, Bengaluru. Open Thursday to Sunday from 3 PM." },
+      { name: "description", content: "Discover Adhome's indulgent tiramisu varieties and handcrafted chocolates in Malleshwaram, Bengaluru. Open daily from 3 PM onwards." },
       { property: "og:title", content: "Adhome — When good taste speaks for itself." },
       { property: "og:description", content: "Premium tiramisu and handcrafted chocolates, made with care in Malleshwaram, Bengaluru." },
       { property: "og:type", content: "website" },
@@ -73,7 +84,7 @@ function Header() {
           {nav.map(([label, id]) => <button key={id} onClick={() => scrollTo(id)} className={`text-[0.66rem] font-semibold uppercase tracking-[0.15em] transition-opacity hover:opacity-60 ${scrolled ? "text-foreground" : "text-primary-foreground"}`}>{label}</button>)}
         </nav>
         <div className="flex items-center gap-2">
-          <Button asChild variant={scrolled ? "luxury" : "cream"} size="editorial" className="hidden sm:inline-flex"><a href={phoneHref}>Order now</a></Button>
+          <Button variant={scrolled ? "luxury" : "cream"} size="editorial" className="hidden sm:inline-flex" onClick={() => scrollTo("order")}>Order now</Button>
           <Sheet>
             <SheetTrigger asChild><Button variant={scrolled ? "ghost" : "cream"} size="icon" className="lg:hidden" aria-label="Open menu"><Menu /></Button></SheetTrigger>
             <SheetContent className="w-full border-border bg-background px-7 pt-20 sm:max-w-md">
@@ -81,7 +92,7 @@ function Header() {
               <nav className="mt-12 flex flex-col border-t border-border">
                 {nav.map(([label, id]) => <SheetClose key={id} asChild><button onClick={() => scrollTo(id)} className="border-b border-border py-5 text-left font-display text-2xl">{label}</button></SheetClose>)}
               </nav>
-              <Button asChild variant="luxury" size="editorial" className="mt-8 w-full"><a href={phoneHref}>Order now</a></Button>
+              <SheetClose asChild><Button variant="luxury" size="editorial" className="mt-8 w-full" onClick={() => scrollTo("order")}>Order now</Button></SheetClose>
             </SheetContent>
           </Sheet>
         </div>
@@ -103,23 +114,23 @@ function AdhomePage() {
             <h1 className="max-w-3xl font-display text-[clamp(3.3rem,7.4vw,7.6rem)] leading-[0.94]">When good taste speaks for itself.</h1>
             <p className="mt-7 max-w-xl text-sm leading-7 text-primary-foreground/80 sm:text-base">Indulgent Tiramisu and handcrafted chocolates, made with care, quality ingredients, and a whole lot of love.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild variant="cream" size="editorial"><a href={phoneHref}>Order now <ArrowRight /></a></Button>
-              <Button variant="luxury-outline" size="editorial" onClick={() => scrollTo("tiramisu")}>Explore tiramisu</Button>
+              <Button variant="cream" size="editorial" onClick={() => scrollTo("order")}>Order now <ArrowRight /></Button>
+              <Button variant="luxury-outline" size="editorial" onClick={() => scrollTo("menu")}>Explore menu</Button>
             </div>
           </div>
-          <div className="mt-12 flex items-center gap-4 text-[0.66rem] font-semibold uppercase tracking-[0.22em]"><span className="h-px w-10 bg-accent" />Thursday — Sunday</div>
+          <div className="mt-12 flex items-center gap-4 text-[0.66rem] font-semibold uppercase tracking-[0.22em]"><span className="h-px w-10 bg-accent" />Open every day</div>
         </div>
         <button onClick={() => scrollTo("intro")} aria-label="Scroll to introduction" className="absolute bottom-7 right-6 z-20 hidden text-primary-foreground lg:block"><ArrowDown /></button>
       </section>
 
-      <section id="intro" className="px-5 py-24 sm:px-8 lg:py-36">
-        <div className="mx-auto grid max-w-6xl gap-9 lg:grid-cols-[1fr_1.1fr] lg:items-end">
-          <h2 className="font-display text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">Made with care.<br />Meant to be remembered.</h2>
-          <p className="max-w-xl text-base leading-8 text-muted-foreground lg:pb-1 lg:text-lg">From creamy Tiramisu to beautifully crafted chocolates, Adhome brings together rich flavours, thoughtful presentation, and the joy of something truly indulgent.</p>
+      <section id="intro" className="px-5 py-24 sm:px-8 lg:py-32">
+        <div className="mx-auto grid max-w-[1240px] gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+          <div><h2 className="font-display text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">Made with care.<br />Meant to be remembered.</h2><p className="mt-7 max-w-xl text-base leading-8 text-muted-foreground lg:text-lg">From creamy Tiramisu to beautifully crafted chocolates, Adhome brings together rich flavours, thoughtful presentation, and the joy of something truly indulgent.</p></div>
+          <div className="image-reveal aspect-[4/3]"><img src={craftImage} alt="Tiramisu being finished with a dusting of cocoa" width={1408} height={1056} loading="lazy" className="h-full w-full object-cover" /></div>
         </div>
       </section>
 
-      <section id="tiramisu" className="bg-ivory px-5 py-24 sm:px-8 lg:py-36">
+      <section id="menu" className="bg-ivory px-5 py-24 sm:px-8 lg:py-36">
         <div className="mx-auto max-w-[1320px]">
           <div className="mb-14 grid gap-5 lg:grid-cols-2 lg:items-end">
             <div><Eyebrow>The Adhome Classics</Eyebrow><h2 className="font-display text-6xl leading-none sm:text-7xl lg:text-8xl">Tiramisu,<br />your way.</h2></div>
@@ -132,7 +143,7 @@ function AdhomePage() {
             </article>
             <div className="grid grid-cols-2 border border-border">
               <div className="image-reveal col-span-2 aspect-[4/2.65] border-b border-border"><img src={collectionImage} alt="Four Adhome tiramisu variations" width={1600} height={1200} loading="lazy" className="h-full w-full object-cover" /></div>
-              {products.map(([name, description], index) => <article key={name} className={`flex min-h-64 flex-col justify-between p-5 sm:p-7 ${index % 2 === 0 ? "border-r border-border" : ""} ${index < 2 ? "border-b border-border" : ""}`}><span className="text-[0.62rem] text-muted-foreground">0{index + 2}</span><div><h3 className="font-display text-2xl sm:text-3xl">{name}</h3><p className="mt-3 hidden text-sm leading-6 text-muted-foreground sm:block">{description}</p><Button asChild variant="link" className="mt-2 h-auto p-0 text-[0.65rem] uppercase tracking-[0.16em]"><a href={phoneHref}>Order <ArrowRight /></a></Button></div></article>)}
+               {products.map(([name, description, image], index) => <article key={name} className={`${index % 2 === 0 ? "border-r border-border" : ""} ${index < 2 ? "border-b border-border" : ""}`}><div className="image-reveal aspect-[4/3]"><img src={image} alt={name} width={1200} height={912} loading="lazy" className="h-full w-full object-cover" /></div><div className="p-5 sm:p-7"><span className="text-[0.62rem] text-muted-foreground">0{index + 2}</span><h3 className="mt-7 font-display text-2xl sm:text-3xl">{name}</h3><p className="mt-3 hidden text-sm leading-6 text-muted-foreground sm:block">{description}</p><Button variant="link" className="mt-3 h-auto p-0 text-[0.65rem] uppercase tracking-[0.16em]" onClick={() => scrollTo("order")}>Order <ArrowRight /></Button></div></article>)}
             </div>
           </div>
         </div>
@@ -161,7 +172,7 @@ function AdhomePage() {
       </section>
 
       <section className="bg-secondary px-5 py-24 sm:px-8 lg:py-32">
-        <div className="mx-auto max-w-[1240px] text-center"><Eyebrow>For every occasion</Eyebrow><h2 className="mx-auto max-w-4xl font-display text-5xl sm:text-7xl">Made for moments worth celebrating.</h2><div className="mt-14 flex flex-wrap justify-center gap-x-7 gap-y-4 border-y border-border py-8 font-display text-2xl sm:gap-x-12 sm:text-3xl">{["Birthdays", "Anniversaries", "Gifting", "Celebrations", "Just Because"].map((item, i) => <span key={item} className="flex items-center gap-7 sm:gap-12">{item}{i < 4 && <span className="text-berry">•</span>}</span>)}</div><p className="mx-auto mt-8 max-w-lg leading-7 text-muted-foreground">Customized chocolates, thoughtfully created for the people and moments that matter.</p><Button asChild variant="luxury" size="editorial" className="mt-8"><a href={phoneHref}>Make an enquiry</a></Button></div>
+        <div className="mx-auto grid max-w-[1240px] gap-12 lg:grid-cols-[1.05fr_.95fr] lg:items-center"><div><Eyebrow>For every occasion</Eyebrow><h2 className="max-w-4xl font-display text-5xl sm:text-7xl">Made for moments worth celebrating.</h2><div className="mt-10 flex flex-wrap gap-x-7 gap-y-4 border-y border-border py-7 font-display text-2xl sm:gap-x-10 sm:text-3xl">{["Birthdays", "Anniversaries", "Gifting", "Celebrations", "Just Because"].map((item, i) => <span key={item} className="flex items-center gap-7 sm:gap-10">{item}{i < 4 && <span className="text-berry">•</span>}</span>)}</div><p className="mt-8 max-w-lg leading-7 text-muted-foreground">Customized chocolates, thoughtfully created for the people and moments that matter.</p><Button variant="luxury" size="editorial" className="mt-8" onClick={() => scrollTo("order")}>Make an enquiry</Button></div><div className="image-reveal aspect-[4/3]"><img src={celebrationImage} alt="Handcrafted chocolates presented in premium gift boxes" width={1408} height={1056} loading="lazy" className="h-full w-full object-cover" /></div></div>
       </section>
 
       <section id="story" className="bg-espresso text-primary-foreground">
@@ -173,20 +184,20 @@ function AdhomePage() {
 
       <section className="px-5 py-24 sm:px-8 lg:py-36">
         <div className="mx-auto max-w-[1320px]"><div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end"><div><Eyebrow>Follow the sweet side</Eyebrow><h2 className="font-display text-6xl sm:text-7xl">A little closer.</h2></div><Button variant="luxury-outline" size="editorial" disabled title="Instagram profile link not yet provided"><Instagram /> Follow Adhome</Button></div>
-          <div className="mt-12 grid grid-cols-2 gap-2 md:grid-cols-4"><div className="image-reveal aspect-square"><img src={classicImage} alt="Classic tiramisu close-up" width={1200} height={1504} loading="lazy" className="h-full w-full object-cover" /></div><div className="image-reveal aspect-square md:mt-14"><img src={chocolateImage} alt="Chocolate gift packaging" width={1408} height={1104} loading="lazy" className="h-full w-full object-cover" /></div><div className="image-reveal aspect-square"><img src={collectionImage} alt="Tiramisu collection" width={1600} height={1200} loading="lazy" className="h-full w-full object-cover" /></div><div className="image-reveal aspect-square md:mt-14"><img src={momentImage} alt="A customer enjoying tiramisu" width={1200} height={1200} loading="lazy" className="h-full w-full object-cover" /></div></div>
+          <div className="mt-12 grid grid-cols-2 gap-2 md:grid-cols-4"><div className="image-reveal aspect-square"><img src={gallerySpoonImage} alt="A spoonful of classic tiramisu" width={1008} height={1008} loading="lazy" className="h-full w-full object-cover" /></div><div className="image-reveal aspect-square md:mt-14"><img src={galleryBoxImage} alt="An open box of handcrafted chocolates" width={1008} height={1008} loading="lazy" className="h-full w-full object-cover" /></div><div className="image-reveal aspect-square"><img src={galleryCocoaImage} alt="Cocoa being dusted over tiramisu cups" width={1008} height={1008} loading="lazy" className="h-full w-full object-cover" /></div><div className="image-reveal aspect-square md:mt-14"><img src={galleryShareImage} alt="Two guests sharing tiramisu" width={1008} height={1008} loading="lazy" className="h-full w-full object-cover" /></div></div>
         </div>
       </section>
 
       <section id="visit" className="bg-ivory px-5 py-24 sm:px-8 lg:py-36">
-        <div className="mx-auto grid max-w-[1240px] gap-14 lg:grid-cols-[1.05fr_.95fr]">
-          <div><Eyebrow>Visit Adhome</Eyebrow><h2 className="max-w-2xl font-display text-6xl leading-none sm:text-8xl">Come Find Your Sweet Spot.</h2></div>
-          <div className="border-t border-border pt-7"><h3 className="font-display text-4xl">Adhome</h3><address className="mt-6 not-italic leading-7 text-muted-foreground">107, 8th Cross Rd,<br />Malleshwaram,<br />Bengaluru, Karnataka 560003</address><dl className="mt-8 grid grid-cols-2 gap-6 border-y border-border py-6"><div><dt className="text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">Available</dt><dd className="mt-2 font-display text-xl">Thursday – Sunday</dd></div><div><dt className="text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">Opening</dt><dd className="mt-2 font-display text-xl">3:00 PM onwards</dd></div></dl><a href={phoneHref} className="mt-6 flex items-center gap-3 text-lg"><Phone className="size-4" />{phone}</a><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button asChild variant="luxury" size="editorial"><a href={phoneHref}>Call Adhome</a></Button><Button asChild variant="luxury-outline" size="editorial"><a href={directionsHref} target="_blank" rel="noreferrer"><MapPin /> Get directions</a></Button><Button asChild variant="luxury-outline" size="editorial"><a href={phoneHref}>Order now</a></Button></div></div>
+        <div className="mx-auto grid max-w-[1240px] gap-14 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
+          <div><Eyebrow>Visit Adhome</Eyebrow><h2 className="max-w-2xl font-display text-6xl leading-none sm:text-8xl">Come Find Your Sweet Spot.</h2><div className="image-reveal mt-10 aspect-[5/4]"><img src={visitImage} alt="An inviting counter filled with tiramisu and chocolates" width={1200} height={1408} loading="lazy" className="h-full w-full object-cover object-center" /></div></div>
+          <div className="border-t border-border pt-7"><h3 className="font-display text-4xl">Adhome</h3><address className="mt-6 not-italic leading-7 text-muted-foreground">107, 8th Cross Rd,<br />Malleshwaram,<br />Bengaluru, Karnataka 560003</address><dl className="mt-8 grid grid-cols-2 gap-6 border-y border-border py-6"><div><dt className="text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">Available</dt><dd className="mt-2 font-display text-xl">Every day</dd></div><div><dt className="text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">Opening</dt><dd className="mt-2 font-display text-xl">3:00 PM onwards</dd></div></dl><a href={phoneHref} className="mt-6 flex items-center gap-3 text-lg"><Phone className="size-4" />{phone}</a><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button asChild variant="luxury" size="editorial"><a href={phoneHref}>Call Adhome</a></Button><Button asChild variant="luxury-outline" size="editorial"><a href={directionsHref} target="_blank" rel="noreferrer"><MapPin /> Get directions</a></Button><Button variant="luxury-outline" size="editorial" onClick={() => scrollTo("order")}>Order now</Button></div></div>
         </div>
       </section>
 
-      <section className="editorial-grain bg-primary px-5 py-24 text-center text-primary-foreground sm:px-8 lg:py-32"><div className="relative z-10 mx-auto max-w-4xl"><h2 className="font-display text-6xl leading-none sm:text-8xl">Try it once.<br />Love it forever.</h2><p className="mx-auto mt-7 max-w-2xl leading-7 text-primary-foreground/70">From your first spoonful of Tiramisu to your next chocolate craving, there's something sweet waiting at Adhome.</p><div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row"><Button asChild variant="cream" size="editorial"><a href={phoneHref}>Order from Adhome</a></Button><Button variant="luxury-outline" size="editorial" onClick={() => scrollTo("visit")}>Visit us</Button></div></div></section>
+      <section id="order" className="editorial-grain bg-primary px-5 py-24 text-center text-primary-foreground sm:px-8 lg:py-32"><div className="relative z-10 mx-auto max-w-4xl"><Eyebrow light>Order from Adhome</Eyebrow><h2 className="font-display text-6xl leading-none sm:text-8xl">Try it once.<br />Love it forever.</h2><p className="mx-auto mt-7 max-w-2xl leading-7 text-primary-foreground/70">From your first spoonful of Tiramisu to your next chocolate craving, there's something sweet waiting at Adhome.</p><div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row"><Button asChild variant="cream" size="editorial"><a href={phoneHref}><Phone /> Call to order</a></Button><Button variant="luxury-outline" size="editorial" onClick={() => scrollTo("menu")}>View menu</Button><Button variant="luxury-outline" size="editorial" onClick={() => scrollTo("visit")}>Visit us</Button></div></div></section>
 
-      <footer className="bg-espresso px-5 py-14 text-primary-foreground sm:px-8"><div className="mx-auto max-w-[1320px]"><div className="grid gap-12 border-b border-primary-foreground/15 pb-12 lg:grid-cols-[1.2fr_.8fr_.8fr]"><div><p className="font-display text-4xl uppercase tracking-[0.12em]">Adhome</p><p className="mt-4 font-display text-2xl text-primary-foreground/70">When good taste speaks for itself.</p></div><nav className="grid grid-cols-2 gap-4 text-xs uppercase tracking-[0.14em]">{nav.map(([label, id]) => <button key={id} onClick={() => scrollTo(id)} className="text-left hover:text-accent">{label}</button>)}</nav><div className="text-sm leading-7 text-primary-foreground/70"><a href={phoneHref}>{phone}</a><p className="mt-3">107, 8th Cross Rd,<br />Malleshwaram,<br />Bengaluru, Karnataka 560003</p><p className="mt-3 text-xs uppercase tracking-[0.16em] text-secondary">Thursday — Sunday</p></div></div><div className="flex items-center justify-between pt-7 text-xs text-primary-foreground/50"><span>Adhome • Bengaluru</span><div className="flex gap-4"><span title="Instagram profile link not provided"><Instagram className="size-4" /></span><a href={reviewsHref} target="_blank" rel="noreferrer" aria-label="Find Adhome on Google"><MapPin className="size-4" /></a></div></div></div></footer>
+      <footer className="bg-espresso px-5 py-14 text-primary-foreground sm:px-8"><div className="mx-auto max-w-[1320px]"><div className="grid gap-12 border-b border-primary-foreground/15 pb-12 lg:grid-cols-[1.2fr_.8fr_.8fr]"><div><p className="font-display text-4xl uppercase tracking-[0.12em]">Adhome</p><p className="mt-4 font-display text-2xl text-primary-foreground/70">When good taste speaks for itself.</p></div><nav className="grid grid-cols-2 gap-4 text-xs uppercase tracking-[0.14em]">{nav.map(([label, id]) => <button key={id} onClick={() => scrollTo(id)} className="text-left hover:text-accent">{label}</button>)}</nav><div className="text-sm leading-7 text-primary-foreground/70"><a href={phoneHref}>{phone}</a><p className="mt-3">107, 8th Cross Rd,<br />Malleshwaram,<br />Bengaluru, Karnataka 560003</p><p className="mt-3 text-xs uppercase tracking-[0.16em] text-secondary">Open every day</p></div></div><div className="flex items-center justify-between pt-7 text-xs text-primary-foreground/50"><span>Adhome • Bengaluru</span><div className="flex gap-4"><span title="Instagram profile link not provided"><Instagram className="size-4" /></span><a href={reviewsHref} target="_blank" rel="noreferrer" aria-label="Find Adhome on Google"><MapPin className="size-4" /></a></div></div></div></footer>
     </main>
   );
 }
